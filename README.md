@@ -16,11 +16,12 @@ This project classifies penguin species based on beak length, flipper length, an
 Penguins-of-Madagascar/
 │── .github/workflows               # Github Actions workflow
 │── Features and model.ipynb        # Feature selection and model training
-│── New prediction with API.ipynb   # Prediction with API based on the model
-│── Prediction.ipynb                # Prediction based on the model without API
+│── New prediction with API.ipynb   # Prediction using API data
+│── Prediction.ipynb                # Prediction based on local input
 │── README.md                       # Documentation (this file)
-│── penguin_classifier.joblib       #
-│── penguins.db                     # Database
+│── penguin_classifier.joblib       # Saved model file
+│── penguins.db                     # SQL Database
+│── prediction.txt                  # Latest prediction result
 ```
 
 
