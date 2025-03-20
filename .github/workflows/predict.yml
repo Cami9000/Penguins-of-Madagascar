@@ -1,0 +1,34 @@
+name: Fetch and Predict Penguin
+
+on:
+  schedule:
+    - cron: "30 6 * * *"  # Every day at  07:30 AM CET (6:30 UTC)
+
+  workflow_dispatch: # Option to launch manually from GitHub
+
+jobs:
+  predict:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # Remember to have a requirements.txt
+
+    - name: Run prediction script
+      run: python predict.py  # This script must be run to retrieve and predict
+
+    - name: Commit and push prediction
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add prediction.txt
+        git commit -m "Opdateret prediction"
+        git push
