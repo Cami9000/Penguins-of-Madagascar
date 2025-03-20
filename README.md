@@ -39,7 +39,7 @@ island_id	        ❌	        ✅	      ❌	            ✅	        Remove ❌
 bill_length_mm, flipper_length_mm, bill_depth_mm
 
 
-##🏆 **Model Training**
+## 🏆 **Model Training**
 
 The model was trained using Logistic Regression, achieving an accuracy of 99% via cross-validation.
 
@@ -50,7 +50,7 @@ Cross-Validation Accuracy: 99% ± 0.00
     models/penguin_classifier.joblib
 
 
-##🔄 **Automated Prediction Pipeline**
+## 🔄 **Automated Prediction Pipeline**
 
 🔹 1️⃣ Fetch New Penguin Data
 import requests
@@ -108,7 +108,7 @@ jobs:
           git commit -m "Updated prediction"
           git push
 
-#**🛠 Running the Project Locally**
+## **🛠 Running the Project Locally**
 
 To test the project locally, follow these steps:
 
