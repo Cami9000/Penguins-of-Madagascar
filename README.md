@@ -21,7 +21,7 @@ Penguins-of-Madagascar/
 │── README.md                       # Documentation (this file)
 │── penguin_classifier.joblib       #
 │── penguins.db                     # Database
-
+```
 
 
 ## 📊 **Feature Selection**
