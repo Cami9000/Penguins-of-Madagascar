@@ -9,8 +9,7 @@ Based on these analyses, we selected the following final features:
 - bill_length_mm
 - flipper_length_mm
 - bill_depth_mm
-- island_id
 
-The feature `body_mass_g` was removed, as it was not consistently important across methods.
+The feature `body_mass_g` and `island_id` was removed, as it was not consistently important across methods.
 
 
