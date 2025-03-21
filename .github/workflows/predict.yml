@@ -2,9 +2,8 @@ name: Fetch and Predict Penguin
 
 on:
   schedule:
-    - cron: "30 6 * * *"  # Every day at  07:30 AM CET (6:30 UTC)
-
-  workflow_dispatch: # Option to launch manually from GitHub
+    - cron: "30 6 * * *"  # Hver dag kl. 07:30 CET (6:30 UTC)
+  workflow_dispatch:       # Mulighed for at køre manuelt
 
 jobs:
   predict:
@@ -19,11 +18,14 @@ jobs:
       with:
         python-version: '3.9'
 
+    - name: Debug - List root directory
+      run: ls -la
+
     - name: Install dependencies
-      run: pip install -r requirements.txt  # Remember to have a requirements.txt
+      run: pip install -r ./requirements.txt
 
     - name: Run prediction script
-      run: python predict.py  # This script must be run to retrieve and predict
+      run: python predict.py  # Sørg for at du har en 'predict.py'-fil i roden
 
     - name: Commit and push prediction
       run: |
