@@ -2,8 +2,8 @@ name: Fetch and Predict Penguin
 
 on:
   schedule:
-    - cron: "30 6 * * *"  # Hver dag kl. 07:30 CET (6:30 UTC)
-  workflow_dispatch:       # Mulighed for at køre manuelt
+    - cron: "30 6 * * *"  # Hver dag kl. 07:30 dansk tid (CET)
+  workflow_dispatch:
 
 jobs:
   predict:
@@ -18,14 +18,12 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Debug - List root directory
-      run: ls -la
-
-    - name: Install dependencies
-      run: pip install -r ./requirements.txt
+    - name: Install dependencies (fallback)
+      run: |
+        pip install numpy pandas requests scikit-learn joblib
 
     - name: Run prediction script
-      run: python predict.py  # Sørg for at du har en 'predict.py'-fil i roden
+      run: python predict.py
 
     - name: Commit and push prediction
       run: |
