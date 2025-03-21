@@ -1,44 +1,32 @@
+from joblib import load
+import numpy as np
 import requests
+from datetime import datetime
 
+# Load the trained model
+model = load("penguin_classifier.joblib")
+
+# Fetch a new penguin from the API
 def fetch_new_penguin():
     url = "http://130.225.39.127:8000/new_penguin/"
     response = requests.get(url)
-
     if response.status_code == 200:
-        new_penguin = response.json()
-        print("✅ New penguin picked up:", new_penguin)
-        return new_penguin
-    else:
-        print("Error retrieving penguin:", response.status_code)
-        return None
+        return response.json()
+    return None
 
-import numpy as np
-from joblib import load
-import warnings
-warnings.filterwarnings('ignore')
+penguin = fetch_new_penguin()
 
+if penguin:
+    features = np.array([[penguin["bill_length_mm"], penguin["flipper_length_mm"], penguin["bill_depth_mm"]]])
+    predicted_class = model.predict(features)[0]
 
-# Load the saved model
-model = load("penguin_classifier.joblib")
-
-# Get a new pinguin from API
-new_penguin = fetch_new_penguin()
-
-if new_penguin:
-    # Only relevant features
-    feature_values = np.array([[new_penguin["bill_length_mm"], 
-                                new_penguin["flipper_length_mm"], 
-                                new_penguin["bill_depth_mm"]]])
-    
-    # Predict the pinguin
-    predicted_class = model.predict(feature_values)[0]
-
-    # Convert numbers back to species name
+    # Convert prediction to species name
     species_mapping = {0: "Adelie", 1: "Chinstrap", 2: "Gentoo"}
     predicted_species = species_mapping.get(predicted_class, "Unknown")
 
-    print(f"Prediction: The penguin is a {predicted_species}!")
-    
-    # Save the result to a file so we can display it on GitHub Pages
-    with open("prediction.txt", "w") as file:
-        file.write(f"Latest prediction: {predicted_species}\n")
+    # Get timestamp
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Save latest and previous predictions in the same file
+    with open("prediction.txt", "a") as file:  # 'a' = append (tilføj uden at slette det gamle)
+        file.write(f"{timestamp}: {predicted_species}\n")
