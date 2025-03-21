@@ -2,7 +2,7 @@ name: Fetch and Predict Penguin
 
 on:
   schedule:
-    - cron: "30 6 * * *"  # Hver dag kl. 07:30 CET (6:30 UTC)
+    - cron: "30 6 * * *"  # Kører hver dag kl. 07:30 CET (6:30 UTC)
   workflow_dispatch:  # Tillader manuel kørsel
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Install dependencies (fallback)
+    - name: Install dependencies
       run: |
         pip install numpy pandas requests scikit-learn joblib
 
@@ -26,9 +26,11 @@ jobs:
       run: python predict.py
 
     - name: Commit and push prediction
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
         git add prediction.txt
-        git commit -m "Opdateret prediction"
-        git push
+        git commit -m "Opdateret prediction" || echo "No changes to commit"
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Cami9000/Penguins-of-Madagascar.git HEAD:main
