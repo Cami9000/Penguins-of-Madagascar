@@ -2,8 +2,8 @@ name: Fetch and Predict Penguin
 
 on:
   schedule:
-    - cron: "30 6 * * *"  # Hver dag kl. 07:30 dansk tid (CET)
-  workflow_dispatch:
+    - cron: "30 6 * * *"  # Hver dag kl. 07:30 CET (6:30 UTC)
+  workflow_dispatch:  # Tillader manuel kørsel
 
 jobs:
   predict:
