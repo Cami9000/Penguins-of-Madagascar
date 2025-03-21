@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penguin Predictions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .prediction-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin-top: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐧 Penguin Species Predictions</h1>
+    <div class="prediction-box">
+        <h2>Latest Prediction:</h2>
+        <p id="latestPrediction">Loading...</p>
+
+        <h2>Previous Predictions:</h2>
+        <ul id="previousPredictions">
+            <li>Loading...</li>
+        </ul>
+    </div>
+
+    <script>
+        async function fetchPredictions() {
+            try {
+                const response = await fetch("https://cami9000.github.io/Penguins-of-Madagascar/predictions.txt");
+                const text = await response.text();
+                const predictions = text.trim().split("\n").reverse();
+
+                document.getElementById("latestPrediction").innerText = predictions[0];
+
+                let previousList = document.getElementById("previousPredictions");
+                previousList.innerHTML = "";
+                predictions.slice(1, 10).forEach(prediction => {
+                    let li = document.createElement("li");
+                    li.textContent = prediction;
+                    previousList.appendChild(li);
+                });
+            } catch (error) {
+                document.getElementById("latestPrediction").innerText = "Error loading predictions.";
+                document.getElementById("previousPredictions").innerHTML = "<li>Error loading data.</li>";
+            }
+        }
+        fetchPredictions();
+    </script>
+</body>
+</html>
