@@ -30,12 +30,13 @@ Penguins-of-Madagascar/
 
 To identify the most relevant features, the following methods were used:
 
-Feature	        Mutual Info	  RFE	   Random Forest	Permutation	  Keep/Remove?
-bill_length_mm	  ✅	        ✅	      ✅	            ✅	        Keep ✅
-flipper_length_mm	✅	        ❌	      ✅	            ❌	        Keep ✅
-bill_depth_mm	    ✅	        ✅	      ✅	            ✅	        Keep ✅
-body_mass_g	      ❌	        ✅	      ❌	            ❌	        Remove ❌
-island_id	        ❌	        ✅	      ❌	            ✅	        Remove ❌
+
+* Feature	        Mutual Info	  RFE	   Random Forest	Permutation	  Keep/Remove?
+* bill_length_mm	    ✅	        ✅	      ✅	            ✅	        Keep ✅
+* flipper_length_mm	    ✅	        ❌	      ✅	            ❌	        Keep ✅
+* bill_depth_mm	        ✅	        ✅	      ✅	            ✅	        Keep ✅
+* body_mass_g	        ❌	        ✅	      ❌	            ❌	        Remove ❌
+* island_id	            ❌	        ✅	      ❌	            ✅	        Remove ❌
 
 🚀 Final features used in the model:
 bill_length_mm, flipper_length_mm, bill_depth_mm
