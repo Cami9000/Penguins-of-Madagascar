@@ -31,6 +31,6 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add prediction.txt
+        git add index.html
         git commit -m "Opdateret prediction" || echo "No changes to commit"
         git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Cami9000/Penguins-of-Madagascar.git HEAD:main
