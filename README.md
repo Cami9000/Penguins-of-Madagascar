@@ -7,7 +7,7 @@ This project classifies penguin species based on beak length, flipper length, an
 - **Model Training**: Uses **Logistic Regression** for species classification.
 - **Automated Data Retrieval**: Fetches new penguin data from an API every morning at 07:30 AM.
 - **GitHub Actions Integration**: Automates prediction updates.
-- **GitHub Pages Deployment**: Displays the latest prediction -->    https://cami9000.github.io/Penguins-of-Madagascar
+- **GitHub Pages Deployment**: Displays the latest prediction -->    https://cami9000.github.io/Penguins-of-Madagascar/
 
 
 ---
