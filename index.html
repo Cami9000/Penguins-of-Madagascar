@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🐧 Penguin Predictions</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      color: #333;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #00796b;
+      margin-bottom: 0.5rem;
+    }
+    p.subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    .prediction-box {
+      background-color: #ffffff;
+      border: 2px solid #b2dfdb;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+    .prediction-box:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .timestamp {
+      font-size: 0.9rem;
+      color: #78909c;
+    }
+    .species {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00796b;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐧 Penguin Predictions</h1>
+  <p class="subtitle">Latest daily predictions from your ML model</p>
+
+  <div id="predictions">Loading predictions...</div>
+
+  <footer>
+    &copy; 2025 Penguins of Madagascar | Built with ❤️
+  </footer>
+
+  <script>
+    fetch('prediction.txt')
+      .then(response => response.text())
+      .then(data => {
+        const container = document.getElementById('predictions');
+        const lines = data.trim().split('\n').reverse(); // Newest on top
+        container.innerHTML = '';
+
+        lines.forEach(line => {
+          const [timestamp, species] = line.split(': ');
+          const box = document.createElement('div');
+          box.className = 'prediction-box';
+          box.innerHTML = `
+            <div class="timestamp">${timestamp}</div>
+            <div class="species">🧠 Predicted: ${species}</div>
+          `;
+          container.appendChild(box);
+        });
+      })
+      .catch(error => {
+        document.getElementById('predictions').innerHTML = '<p>Could not load predictions 😢</p>';
+      });
+  </script>
+</body>
+</html>
